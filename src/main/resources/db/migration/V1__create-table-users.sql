@@ -1,7 +1,0 @@
-CREATE TABLE "TB_USERS"(
-    id TEXT NOT NULL PRIMARY KEY,
-    email TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL,
-    role VARCHAR(11), 
-    amount DECIMAL(19, 2)
-);

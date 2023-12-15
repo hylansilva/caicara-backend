@@ -15,22 +15,27 @@ import br.com.cooperativa.caicara.caicarabackend.domain.service.UserService;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
 
     @Override
     public Optional<User> findById(UUID id) {
-        return repository.findById(id);
+        return userRepository.findById(id);
     }
 
     @Override
     public User saveUser(UserDTO data) {
         User user = User.from(data);
-        return repository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return repository.findByEmail(email);
+        return userRepository.findByEmail(email);
+    }
+    
+    @Override
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
 
 }

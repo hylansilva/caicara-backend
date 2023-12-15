@@ -5,16 +5,9 @@ import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 
-
 public record UserDTO(
-        @Email
-        @NotBlank
-        String email,
-        @NotBlank
-        String password,
-        @NotNull
-        UserType role,
-        @NotNull
-        BigDecimal amount
-) {
+                @Email @NotBlank String email,
+                @NotBlank String password,
+                @NotNull UserType role,
+                @NotNull BigDecimal amount) {
 }

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cooperativa.caicara.caicarabackend.domain.dto.user.UserDTO;
@@ -28,11 +27,15 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> create(@RequestBody @Valid UserDTO DTO) {
+        if (userService.existsByEmail(DTO.email())) {
+            return ResponseEntity.badRequest().build();
+        }
+
         User createdUser = userService.saveUser(DTO);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        return new ResponseEntity<User>(createdUser, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<User> getUserById(@PathVariable UUID id) {
         Optional<User> user = userService.findById(id);
 
@@ -40,7 +43,7 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
         Optional<User> user = userService.findByEmail(email);
 

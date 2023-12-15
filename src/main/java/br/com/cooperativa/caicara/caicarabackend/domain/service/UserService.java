@@ -1,4 +1,4 @@
-package br.com.cooperativa.caicara.caicarabackend.domain.service;
+ package br.com.cooperativa.caicara.caicarabackend.domain.service;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -14,4 +14,5 @@ public interface UserService {
     Optional<User> findById(UUID id);
     User saveUser(UserDTO data);
     Optional<User> findByEmail(String email);
+    boolean existsByEmail(String email);
 }
